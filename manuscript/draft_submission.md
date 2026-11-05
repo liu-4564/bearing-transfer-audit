@@ -6,7 +6,7 @@ Corresponding author: Jiarui Liu, ages257@outlook.com; ORCID: 0009-0002-3035-929
 
 ## Abstract
 
-Deep-learning bearing-fault classifiers routinely exceed 99% accuracy, yet almost all such numbers come from a single test rig. We harmonised three public vibration datasets into one three-class problem and evaluated three models under random-window, run-level and cross-rig protocols. Within a dataset accuracy saturates at 0.999–1.000 and cannot rank methods. Between rigs balanced accuracy spans 0.04–0.61, and its level follows the descriptor-space distance between the two machines (ρ = −0.96) rather than the architecture: the cue, not the capacity, changes. Sixty labelled windows recover most of the loss, so deployment risk is estimable before installation.
+Deep-learning bearing-fault classifiers routinely exceed 99% accuracy, yet almost all such numbers come from a single test rig. We harmonised three public vibration datasets into one three-class problem and evaluated three models under random-window, run-level and cross-rig protocols. Within a dataset accuracy saturates at 0.999–1.000 and cannot rank methods. Between rigs balanced accuracy spans 0.04–0.61 and follows the descriptor-space distance between the machines (ρ = −0.96), not the architecture: the cue, not the capacity, changes. Twenty labels per class recover most of the loss, so deployment risk is estimable before installation.
 
 **Keywords:** benchmarking; bearings; diagnostics; reproducibility; transferability
 
