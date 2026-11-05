@@ -1,0 +1,24 @@
+# third-party data: obtain separately, see data/README.md
+data/*
+!data/README.md
+
+# cached window tensors
+*.npz
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# os / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# local build output
+release/

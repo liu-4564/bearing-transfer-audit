@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this code or these results, please cite the paper; until it appears, cite this repository."
+title: "How much of 99% accuracy survives a change of machine? A three-rig audit of bearing-fault benchmarks"
+abstract: >-
+  Code and result files for a three-rig audit of rolling-element bearing fault
+  benchmarks. Within a dataset the benchmark is saturated; across machines
+  balanced accuracy falls to between 0.039 and 0.612, and the ordering follows
+  the descriptor distance between the two rigs (Spearman rho = -0.956) rather
+  than the architecture.
+authors:
+  - family-names: "Liu"
+    given-names: "Jiarui"
+repository-code: "https://github.com/liu-4564/bearing-transfer-audit"
+license: MIT
+keywords:
+  - condition monitoring
+  - rolling-element bearing
+  - domain shift
+  - benchmark evaluation
+  - reproducibility
