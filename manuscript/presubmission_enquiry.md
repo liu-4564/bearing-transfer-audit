@@ -22,12 +22,14 @@ I am writing to enquire whether the following study would be suitable for consid
 
 **Why it may interest readers outside the field.** The result is not about bearings as such. It is a concrete, quantified demonstration of how a widely used evaluation convention inflates reported performance in applied machine learning, of what governs whether that performance survives a change of setting, and of what a minimal reporting standard would look like for this class of studies. We end with a five-item checklist — the unit of the train/test split, per-class recall alongside aggregate accuracy, the chance level of the label set, the normalisation scheme, and one result on data recorded elsewhere — that we believe general readers and referees in any data-driven applied field can apply.
 
-All datasets are public, all code will be released, and the study involves no human or animal subjects.
+All three datasets are public, all code and result files are already released at
+<https://github.com/liu-4564/bearing-transfer-audit>, and the study involves no human or animal
+subjects.
 
 I would be grateful for your guidance on whether this falls within the journal's scope, and on the most appropriate article category. I can send the full manuscript immediately.
 
 Yours sincerely,
 
-[Name]
-[Affiliation, city, country]
-[Email] | ORCID: [xxxx-xxxx-xxxx-xxxx]
+Jiarui Liu
+Qingdao University of Technology, Linyi, China
+ages257@outlook.com | ORCID: 0009-0002-3035-9295

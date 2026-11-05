@@ -2,7 +2,7 @@
 
 436 JSON files, one per configuration, plus `tables.md`. Two more files are bookkeeping
 rather than results: `summary.json` (the index `src.summarize` walks) and
-`rig_distances.json` (the cached descriptor distances, so Fig. 6c and Table 4 rebuild
+`rig_distances.json` (the cached descriptor distances, so Fig. S1c and Table 4 rebuild
 without the raw corpora).
 
 Every file is a flat record. The fields that matter:
@@ -63,10 +63,14 @@ the family-equal-weight cross-dataset summary together with the two
 correlations against descriptor-space rig distance. It is the only file here
 that is derived rather than raw.
 
+The numbers here predate the typesetting. The four tables in this file appear in
+the paper as Table S1 (here Table 1), Table S2 (here Table 2), Table S3 (here
+Table 3) and Table 1 of the main text (here Table 4).
+
 ## rig_distances.json
 
 The three pairwise distances of §2.5 are not a result of any single run: they
 are computed from the waveforms. The values are cached here so that
-`src.summarize` and `src.make_figures` can rebuild Table 1 and Fig. 6c from a
+`src.summarize` and `src.make_figures` can rebuild Table 1 and Fig. S1c from a
 checkout that has no corpora. The cache is only read when the corpora are
 absent, so regenerating with the data present always overwrites it.

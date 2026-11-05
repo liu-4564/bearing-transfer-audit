@@ -39,7 +39,7 @@ bearing-transfer-audit/
 │   ├── make_figures.py   results/*.json -> figures/* (half the code base)
 │   ├── illus.py          schematic primitives for Fig. 1
 │   ├── plotstyle.py      rcParams, Crameri maps, Okabe-Ito palette
-│   ├── diagnose.py       class-conditional signal statistics behind Fig. 6
+│   ├── diagnose.py       class-conditional signal statistics behind Fig. S1
 │   ├── fetch_pu.py       downloader for the Paderborn archive
 │   └── smoke.py          loader self-check
 ├── results/              436 configuration JSON + summary.json + tables.md

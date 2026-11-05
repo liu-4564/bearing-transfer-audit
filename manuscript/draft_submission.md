@@ -1,9 +1,8 @@
 # How much of "99% accuracy" survives a change of machine? A three-rig audit of bearing-fault benchmarks
 
-[Author full name]^1, [Author full name]^2
-^1 [Department, Institution], [City, Country]
-^2 [Department, Institution], [City, Country]
-Corresponding author: [name], [email]; ORCID: [0000-0000-0000-0000]
+Jiarui Liu^1
+^1 Qingdao University of Technology, Linyi, China
+Corresponding author: Jiarui Liu, ages257@outlook.com; ORCID: 0009-0002-3035-9295
 
 ## Abstract
 
@@ -65,6 +64,8 @@ To ask what governs the depth of the collapse, we need a number for "how differe
 
 ## Results
 
+Fig. 2 shows what the classifier actually sees: one window from each class in CWRU, its envelope spectrum and its time-frequency map. The classes differ in an impulse train and in the band that train excites, and in little else that is visible to the eye.
+
 ### Within a dataset, the benchmark is saturated
 
 On CWRU all three models reach 0.999–1.000 accuracy under both the random and the run-level split and under both normalisation schemes (Fig. 3). The 21-feature model, the shallow CNN and the residual network are indistinguishable. Changing the split changes nothing.
@@ -77,33 +78,33 @@ Two conclusions follow. On the most widely used dataset in the field, accuracy c
 
 ### Across datasets, the collapse is real but not uniform
 
-Without adaptation, cross-dataset balanced accuracy spans 0.039–0.612 across the six directions and three models, against a chance level of 0.333 (Fig. 4a, Fig. 5).
+Without adaptation, cross-dataset balanced accuracy spans 0.039–0.612 across the six directions and three models, against a chance level of 0.333 (Fig. 4a).
 
-The worst case is total. A ResNet trained on CWRU and tested on MFPT reaches 0.043 balanced accuracy, less than a seventh of the chance level; averaged over the three models the direction gives 0.050. The confusion matrix (Fig. 7b) shows why this is not a partial failure: healthy windows are all labelled inner race, and the two fault classes are exchanged with 94% probability in each direction. The model has not lost the signal, it has applied a decision boundary calibrated on a different scale and then mapped impulsiveness onto the wrong label.
+The worst case is total. A ResNet trained on CWRU and tested on MFPT reaches 0.043 balanced accuracy, less than a seventh of the chance level; averaged over the three models the direction gives 0.050. The confusion matrix (Fig. 5b) shows why this is not a partial failure: healthy windows are all labelled inner race, and the two fault classes are exchanged with 94% probability in each direction. The model has not lost the signal, it has applied a decision boundary calibrated on a different scale and then mapped impulsiveness onto the wrong label.
 
 Two directions sit near chance (MFPT → CWRU 0.282, MFPT → PU 0.324). Three are clearly above it (CWRU → PU 0.418, PU → CWRU 0.425, PU → MFPT 0.412). No direction reaches a level that a maintenance engineer could use, but the spread is systematic rather than random: the same pair of rigs gives similar results in both directions, and the best direction reaches eight times the worst (0.425 against 0.050, averaged over models).
 
 ### The depth of the collapse is predicted by the distance between the rigs
 
-The three pairwise distances are 7.87 (CWRU–MFPT), 6.87 (MFPT–PU) and 5.42 (CWRU–PU) pooled standard deviations. Sorted by that distance, the six transfer accuracies, one per direction and averaged over the three model families, fall into three pairs that do not overlap: 0.050 and 0.282 at 7.87, 0.324 and 0.412 at 6.87, 0.418 and 0.425 at 5.42 (Fig. 6c, Table 1). The rank correlation is Spearman ρ = −0.956 (p = 0.003, n = 6). A straight-line fit is weaker, r = −0.763 (p = 0.077), because both directions involving the closest pair, together with PU → MFPT from the middle pair, land inside a band 0.013 wide (0.412 to 0.425) and flatten the right-hand end of the scatter. Six points is a small sample, and the relation we claim is an ordering rather than a calibration curve: we do not read the slope as a conversion factor between distance and accuracy.
+The three pairwise distances are 7.87 (CWRU–MFPT), 6.87 (MFPT–PU) and 5.42 (CWRU–PU) pooled standard deviations. Sorted by that distance, the six transfer accuracies, one per direction and averaged over the three model families, fall into three pairs that do not overlap: 0.050 and 0.282 at 7.87, 0.324 and 0.412 at 6.87, 0.418 and 0.425 at 5.42 (Fig. S1c, Table 1). The rank correlation is Spearman ρ = −0.956 (p = 0.003, n = 6). A straight-line fit is weaker, r = −0.763 (p = 0.077), because both directions involving the closest pair, together with PU → MFPT from the middle pair, land inside a band 0.013 wide (0.412 to 0.425) and flatten the right-hand end of the scatter. Six points is a small sample, and the relation we claim is an ordering rather than a calibration curve: we do not read the slope as a conversion factor between distance and accuracy.
 
 One objection is easy to raise: the distance is computed in the feature space of the 21-feature model, so it may be predicting itself. The data say otherwise. The distance predicts the two networks, which are trained on raw windows and never see those descriptors, more strongly than it predicts the model that does: ρ = −0.91 (p = 0.012) for the ResNet and −0.84 (p = 0.038) for the CNN, against −0.48 (p = 0.34) for the 21-feature model. What the statistic captures is a property of the two machines rather than a shared representation; the weaker correlation for the feature model reflects its own irregular behaviour at the closest pair, where its accuracy falls below that of its neighbours.
 
 The ordering is not a restatement of "different datasets are different". It gives the practitioner's question, will this model work on my machine, a measurable proxy computable from unlabelled recordings on both sides.
 
-Fig. 7a shows the same structure in the feature space: the three datasets occupy distinct regions of a t-SNE projection, but CWRU and PU interleave, and those are the two rigs whose transfer works best.
+Fig. 5a shows the same structure in the feature space: the three datasets occupy distinct regions of a t-SNE projection, but CWRU and PU interleave, and those are the two rigs whose transfer works best.
 
 ### Why the cue changes
 
-The amplitude statistics explain the failure mode. In CWRU the median RMS of healthy windows is 0.065 against 0.332 for inner-race and 0.558 for outer-race windows, a factor of 5.1 to 8.6. In PU the same ratio is 1.4 to 1.9; in MFPT, 1.4 to 3.4 (Fig. 6a). A threshold on energy that separates the classes in one rig is misplaced in every other, and the direction of the error depends on which rig supplied the training data.
+The amplitude statistics explain the failure mode. In CWRU the median RMS of healthy windows is 0.065 against 0.332 for inner-race and 0.558 for outer-race windows, a factor of 5.1 to 8.6. In PU the same ratio is 1.4 to 1.9; in MFPT, 1.4 to 3.4 (Fig. S1a). A threshold on energy that separates the classes in one rig is misplaced in every other, and the direction of the error depends on which rig supplied the training data.
 
-Impulsiveness tells a similar story with a different ordering. The median excess kurtosis of inner-race windows is 3.0 in CWRU, 36.9 in MFPT and 1.1 in PU (Fig. 6b): the same nominal fault is impulsive in one rig, mildly impulsive in the second and nearly sinusoidal in the third. The feature that identifies inner-race damage in MFPT resembles severe outer-race damage in CWRU, which is exactly the swap seen in the confusion matrix. In PU the ordering is reversed outright — healthy windows have higher kurtosis (2.1) than inner-race windows (1.1) — so a rule learned on either of the other two rigs not only fails but inverts.
+Impulsiveness tells a similar story with a different ordering. The median excess kurtosis of inner-race windows is 3.0 in CWRU, 36.9 in MFPT and 1.1 in PU (Fig. S1b): the same nominal fault is impulsive in one rig, mildly impulsive in the second and nearly sinusoidal in the third. The feature that identifies inner-race damage in MFPT resembles severe outer-race damage in CWRU, which is exactly the swap seen in the confusion matrix. In PU the ordering is reversed outright — healthy windows have higher kurtosis (2.1) than inner-race windows (1.1) — so a rule learned on either of the other two rigs not only fails but inverts.
 
 Normalisation changes the magnitude without changing the picture. Per-window z-scoring removes the amplitude cue and moves CWRU → MFPT slightly upward (0.129 against 0.068 for the CNN) while moving MFPT → CWRU down (0.205 against 0.318). Neither scheme rescues transfer alone. The choice alone moves the result by a factor of two in either direction, which is why it belongs in the methods section of every paper in this area.
 
 ### Twenty labels per class recover most of the loss
 
-Balanced accuracy rises with k in every direction (Fig. 5). At k = 20 the deep models reach 0.405–0.998 (1D-CNN) and 0.645–1.000 (1D-ResNet), the upper end being the CWRU → PU direction, where 20 windows per class from the target rig are enough for a balanced accuracy of 1.000 and 0.998. Where the rigs are far apart, the same budget buys much less: 0.586 (CNN) and 0.777 (ResNet) for CWRU → MFPT.
+Balanced accuracy rises with k in every direction (Fig. S2). At k = 20 the deep models reach 0.405–0.998 (1D-CNN) and 0.645–1.000 (1D-ResNet), the upper end being the CWRU → PU direction, where 20 windows per class from the target rig are enough for a balanced accuracy of 1.000 and 0.998. Where the rigs are far apart, the same budget buys much less: 0.586 (CNN) and 0.777 (ResNet) for CWRU → MFPT.
 
 The 21-feature model is the more useful at this budget. Refitted on 20 target windows per class it reaches 0.785 for CWRU → MFPT and 0.763 for MFPT → CWRU, against 0.405–0.777 for the two deep models on the same two directions. It is best or joint-best in all six, with a mean of 0.887 across directions against 0.780 for the ResNet and 0.709 for the CNN. Most of its gain arrives early: at k = 5 it already averages 0.849, where the deep models are at 0.540 and 0.607. Stability is a separate matter and the advantage is not uniform: the ResNet's seed-to-seed s.d. reaches 0.20 in the PU → CWRU direction and its CWRU → MFPT result ranges from 0.667 to 0.928 across three seeds, while the 21-feature model's own s.d. reaches 0.22 in the opposite direction. Both are unstable, in different places; the difference is that the instability costs the 21-feature model less accuracy on average.
 
@@ -111,7 +112,7 @@ The practical reading: recovery needs 60 labelled windows, a few seconds of vibr
 
 ### Noise degrades the benchmark, not the conclusion
 
-Adding white Gaussian noise degrades within-dataset performance, and the three rigs lose it at different rates: on CWRU the 1D-CNN falls from 0.998 balanced accuracy at 8 dB to 0.890 at 0 dB and 0.508 at −4 dB, on PU from 1.000 to 0.521 and 0.333, while MFPT barely moves (0.870 at 8 dB, 0.856 at −4 dB). In the CWRU–MFPT directions, cross-dataset accuracy stays between 0.06 and 0.32 at every SNR tested and the two directions never cross (Fig. S1). The transfer failure is therefore neither caused by clean signals nor repaired by noisy ones. That the two saturated rigs differ so much in noise tolerance is a reminder that "1.000" hides a second axis of variation, which the standard benchmark never reports.
+Adding white Gaussian noise degrades within-dataset performance, and the three rigs lose it at different rates: on CWRU the 1D-CNN falls from 0.998 balanced accuracy at 8 dB to 0.890 at 0 dB and 0.508 at −4 dB, on PU from 1.000 to 0.521 and 0.333, while MFPT barely moves (0.870 at 8 dB, 0.856 at −4 dB). In the CWRU–MFPT directions, cross-dataset accuracy stays between 0.06 and 0.32 at every SNR tested and the two directions never cross (Fig. S3). The transfer failure is therefore neither caused by clean signals nor repaired by noisy ones. That the two saturated rigs differ so much in noise tolerance is a reminder that "1.000" hides a second axis of variation, which the standard benchmark never reports.
 
 ## Discussion
 
@@ -141,9 +142,9 @@ We thank the Case Western Reserve University Bearing Data Center, the Machinery 
 
 **Data availability.** All three datasets are public: CWRU^7, MFPT via the Machinery Failure Prevention Technology Society, and PU^9. We generated no data.
 **Code availability.** Code, cached window indices and all result files: https://github.com/liu-4564/bearing-transfer-audit.
-**Funding.** No external funding received.
-**Conflict of interest.** The authors declare no conflict of interest.
-**Author contributions.** [to be completed]
+**Funding.** No external funding was received for this work.
+**Conflict of interest.** The author declares no competing interests.
+**Author contributions.** J.L. conceived the study, wrote the code, ran the experiments, analysed the results and wrote the manuscript.
 
 ## References
 

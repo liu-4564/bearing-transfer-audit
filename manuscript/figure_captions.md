@@ -7,6 +7,7 @@
 
 ---
 
+
 **Graphical abstract.** One model, three machines. Trained and tested on the same rig, the
 classifier is at ceiling (balanced accuracy 1.000). Moved to another rig it falls to 0.043 — below
 guessing, because healthy windows are labelled as inner-race faults. How far it falls is not
@@ -63,15 +64,17 @@ pool; the arrow in each cell gives the level reached after adaptation. Diagonal 
 because the within-dataset benchmark is already saturated at k = 0 and has nothing to gain. The gain is largest exactly where the frozen model fails worst (CWRU → MFPT, +0.74),
 which is the behaviour expected if adaptation restores a scale rather than teaching a new feature.
 
-**Fig. 5** Few-shot recovery in six transfer directions. Balanced accuracy against the number of
-labelled target windows per class, k, for three model families; shaded bands are ±1 s.d. over
-three random seeds. The dashed horizontal line is chance (0.333); the dotted lines mark the
-target-domain ceiling, i.e. the accuracy the same model reaches on the target dataset with a
-split by run, which bounds what adaptation can achieve. Note that the ranking at k = 20 differs
-from the ranking within a dataset: the 21-feature model (grey) overtakes
-both deep models once target labels are scarce.
+**Fig. 5** What the model represents, before and after adaptation. (a) t-SNE projection of the 21
+features for 700 windows per dataset, globally standardised. The three datasets occupy different
+regions, but CWRU and PU interleave: the two rigs that transfer best are also the two whose
+descriptors overlap most. (b) Confusion matrix of the frozen ResNet on CWRU → MFPT, row-normalised:
+healthy windows are all assigned to the inner-race class, and the two fault classes are exchanged
+(94% each way). (c) The same model after fine-tuning on 20 windows per class, for the best of three
+seeds: the diagonal is restored and the residual error moves to the outer-race row. Over the three
+seeds this configuration gives 0.928, 0.740 and 0.667 balanced accuracy, which is the instability
+discussed in the text. Axes: H, healthy; IR, inner race; OR, outer race.
 
-**Fig. 6** Why the transfer fails, and why it fails to different degrees. (a) Class-conditional
+**Fig. S1** Why the transfer fails, and why it fails to different degrees. (a) Class-conditional
 distributions of window RMS for the three datasets (density on a log10 scale; ticks below each
 ridge show individual windows). The amplitude separation between healthy and faulty windows is
 5.1–8.6× in CWRU, 1.4–3.4× in MFPT and 1.4–1.9× in PU: a threshold on energy that is correct in
@@ -85,20 +88,19 @@ indicates the target domain, and the label gives source → target (C, CWRU; M, 
 rank correlation is Spearman ρ = −0.956 (p = 0.003, n = 6 directions). The severity of the collapse
 is a property of the pair of machines, not of the model.
 
-**Fig. 7** What the model represents, before and after adaptation. (a) t-SNE projection of the 21
-features for 700 windows per dataset, globally standardised. The three datasets occupy different
-regions, but CWRU and PU interleave: the two rigs that transfer best are also the two whose
-descriptors overlap most. (b) Confusion matrix of the frozen ResNet on CWRU → MFPT, row-normalised:
-healthy windows are all assigned to the inner-race class, and the two fault classes are exchanged
-(94% each way). (c) The same model after fine-tuning on 20 windows per class, for the best of three
-seeds: the diagonal is restored and the residual error moves to the outer-race row. Over the three
-seeds this configuration gives 0.928, 0.740 and 0.667 balanced accuracy, which is the instability
-discussed in the text. Axes: H, healthy; IR, inner race; OR, outer race.
+**Fig. S2** Few-shot recovery in six transfer directions. Balanced accuracy against the number of
+labelled target windows per class, k, for three model families; shaded bands are ±1 s.d. over
+three random seeds. The dashed horizontal line is chance (0.333); the dotted lines mark the
+target-domain ceiling, i.e. the accuracy the same model reaches on the target dataset with a
+split by run, which bounds what adaptation can achieve. Note that the ranking at k = 20 differs
+from the ranking within a dataset: the 21-feature model (grey) overtakes
+both deep models once target labels are scarce.
 
-**Fig. S1** Robustness of the conclusions to additive white Gaussian noise injected into the test
+**Fig. S3** Robustness of the conclusions to additive white Gaussian noise injected into the test
 set. Balanced accuracy of the 1D-CNN under global normalisation, for within-dataset evaluation
 (split by run) and for transfer without adaptation, at the SNR indicated. Within-dataset
 performance degrades at rig-specific rates — CWRU loses half its accuracy between 0 dB and −4 dB,
 PU already at 0 dB, and MFPT almost not at all — while cross-dataset performance stays at or near
 chance in every CWRU–MFPT direction at every SNR tested. Neither the failure nor its ranking is an
 artefact of clean recordings.
+

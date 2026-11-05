@@ -118,9 +118,9 @@ the repository alone. Both were checked from a checkout with no corpora in it:
 
 - `python -m src.summarize` regenerates `results/tables.md`, byte-identical,
   including the full-strength correlation of -0.956.
-- `python -m src.make_figures` regenerates figures 1, 3, 4, 5, S1 and the
+- `python -m src.make_figures` regenerates figures 1, 3, 4, S2, S3 and the
   graphical abstract. All six PNGs match the committed ones exactly. Figures 2,
-  6 and 7 are skipped with a message.
+  5 and S1 are skipped with a message.
 
 The one statistic that is not stored as a result file is the rig distance of
 §2.5, which is computed from the waveforms. Its values are cached in
@@ -130,8 +130,8 @@ with the data present always overwrites it. That is what lets the correlation in
 Table 1 survive a data-free checkout.
 
 Three figures are drawn from the signals themselves and do need the corpora:
-Fig. 2 (waveforms, envelope spectra, spectrograms), Fig. 6 (per-window RMS and
-kurtosis distributions) and Fig. 7 (t-SNE of per-window descriptors). They are
+Fig. 2 (waveforms, envelope spectra, spectrograms), Fig. S1 (per-window RMS and
+kurtosis distributions) and Fig. 5 (t-SNE of per-window descriptors). They are
 committed as PDF and PNG, so nothing is lost for a reader; only redrawing them
 requires the data.
 

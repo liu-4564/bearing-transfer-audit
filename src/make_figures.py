@@ -764,7 +764,7 @@ def fig_recovery(rows, norm="global"):
     fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, -0.02),
                ncol=5, fontsize=6.0, handletextpad=0.4, columnspacing=1.1)
     fig.subplots_adjust(hspace=0.30, wspace=0.18, bottom=0.14, top=0.94)
-    save(fig, "fig5_recovery")
+    save(fig, "figS2_recovery")
 
 
 # ---------------------------------------------------------------- Fig 6
@@ -903,7 +903,7 @@ def fig_mechanism(rows, norm="global"):
                 bbox=dict(fc="white", ec="none", pad=1.0, alpha=0.9))
     panel(ax, "c", dx=-0.30, dy=1.04)
 
-    save(fig, "fig6_mechanism")
+    save(fig, "figS1_mechanism")
     # print the numbers the prose quotes
     from scipy.stats import pearsonr, spearmanr
     for i, l_ in enumerate(labs):
@@ -990,7 +990,7 @@ def fig_embedding(rows):
         cb.set_label("P(predicted $\\mid$ true)", fontsize=6.2, labelpad=2)
         cb.ax.tick_params(labelsize=6.0, length=1.8, width=0.5)
         cb.outline.set_linewidth(0.4)
-    save(fig, "fig7_embedding")
+    save(fig, "fig5_embedding")
 
 
 # ---------------------------------------------------------------- Fig S1
@@ -1032,7 +1032,7 @@ def fig_snr(rows, norm="global"):
     cb.set_label("Balanced accuracy", fontsize=6.2)
     cb.ax.tick_params(labelsize=5.6)
     cb.outline.set_linewidth(0.4)
-    save(fig, "figS1_snr")
+    save(fig, "figS3_snr")
 
 
 if __name__ == "__main__":
